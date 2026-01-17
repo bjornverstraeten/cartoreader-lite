@@ -260,7 +260,7 @@ class CartoLLStudy:
         self.visitag_data = read_visitag_dir(os.path.join(dir_name, "VisiTagExport"))
 
     def __init__(self, arg1 : str, arg2 : str = None) -> None:
-        assert issubclass(type(arg1), str), "Given arguments not (yet) supported"
+        assert isinstance(arg1, str | os.PathLike), "Given arguments not (yet) supported"
         if os.path.isdir(arg1):
             self._from_dir(arg1, arg2)
         elif os.path.isfile(arg1) and arg1.endswith(".zip"): #Possible second argument: study name
