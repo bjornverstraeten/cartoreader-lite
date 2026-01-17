@@ -318,7 +318,12 @@ class CartoStudy():
         if carto_map_kwargs is None:
             carto_map_kwargs = {}
 
-        if issubclass(type(arg1), str) and os.path.isfile(arg1) and arg1.endswith(".pkl.gz") and arg2 is None:
+        if (
+            isinstance(arg1, (str, PathLike))
+            and arg2 is None
+            and os.path.isfile(os.fspath(arg1))
+            and os.fspath(arg1).endswith(".pkl.gz")
+        ):
             loaded_study = CartoStudy.load_pickled_study(arg1)
 
             #https://stackoverflow.com/questions/2709800/how-to-pickle-yourself
